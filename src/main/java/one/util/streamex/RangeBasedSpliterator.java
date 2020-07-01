@@ -33,7 +33,9 @@ import static one.util.streamex.Internals.ObjIntBox;
 /**
  * @author Tagir Valeev
  */
-/* package */abstract class RangeBasedSpliterator<T, S extends RangeBasedSpliterator<T, ?>> extends CloneableSpliterator<T, S> {
+/* package */abstract class RangeBasedSpliterator<T, S extends RangeBasedSpliterator<T, ?>>
+        extends CloneableSpliterator<T, S> {
+
     int cur;
     int limit;
 

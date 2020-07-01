@@ -29,7 +29,8 @@ import static one.util.streamex.Internals.CloneableSpliterator;
 /**
  * @author Tagir Valeev
  */
-/* package */final class OrderedCancellableSpliterator<T, A> extends CloneableSpliterator<A, OrderedCancellableSpliterator<T, A>> {
+/* package */final class OrderedCancellableSpliterator<T, A>
+        extends CloneableSpliterator<A, OrderedCancellableSpliterator<T, A>> {
     private Spliterator<T> source;
     private final Object lock = new Object();
     private final BiConsumer<A, ? super T> accumulator;

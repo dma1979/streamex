@@ -31,7 +31,9 @@ import static one.util.streamex.Internals.CloneableSpliterator;
 /**
  * @author Tagir Valeev
  */
-/* package */class UnorderedCancellableSpliterator<T, A> extends CloneableSpliterator<A, UnorderedCancellableSpliterator<T, A>> {
+/* package */class UnorderedCancellableSpliterator<T, A>
+        extends CloneableSpliterator<A, UnorderedCancellableSpliterator<T, A>> {
+
     private volatile Spliterator<T> source;
     private final BiConsumer<A, ? super T> accumulator;
     private final Predicate<A> cancelPredicate;

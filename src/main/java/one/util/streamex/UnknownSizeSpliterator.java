@@ -24,7 +24,9 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 
-/* package */abstract class UnknownSizeSpliterator<T, S extends UnknownSizeSpliterator<? extends T, S, I>, I extends Iterator<? extends T>>
+/* package */abstract class UnknownSizeSpliterator<T,
+                                                   S extends UnknownSizeSpliterator<? extends T, S, I>,
+                                                   I extends Iterator<? extends T>>
         implements Spliterator<T> {
     static final int BATCH_UNIT = 1 << 10; // batch array size increment
     static final int MAX_BATCH = 1 << 25; // max batch array size;

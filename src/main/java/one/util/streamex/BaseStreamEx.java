@@ -23,8 +23,12 @@ import java.util.stream.BaseStream;
 /**
  * @author Tagir Valeev
  */
-/* package */abstract class BaseStreamEx<T, S extends BaseStream<T, S>, SPLTR extends Spliterator<T>, B extends BaseStreamEx<T, S, SPLTR, B>>
+/* package */abstract class BaseStreamEx<T,
+                                         S extends BaseStream<T, S>,
+                                         SPLTR extends Spliterator<T>,
+                                         B extends BaseStreamEx<T, S, SPLTR, B>>
         implements BaseStream<T, S> {
+
     static final String CONSUMED_MESSAGE = "Stream is already consumed";
 
     private S stream;

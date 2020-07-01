@@ -25,7 +25,9 @@ import one.util.streamex.Internals.CloneableSpliterator;
 /**
  * @author Tagir Valeev
  */
-/* package */final class PairPermutationSpliterator<T, R> extends CloneableSpliterator<R, PairPermutationSpliterator<T, R>> {
+/* package */final class PairPermutationSpliterator<T, R>
+        extends CloneableSpliterator<R, PairPermutationSpliterator<T, R>> {
+
     private long cur;
     private long limit;
     private final int size;

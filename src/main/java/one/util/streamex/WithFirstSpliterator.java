@@ -25,7 +25,9 @@ import one.util.streamex.Internals.CloneableSpliterator;
 /**
  * @author Tagir Valeev
  */
-/* package */final class WithFirstSpliterator<T, R> extends CloneableSpliterator<R, WithFirstSpliterator<T, R>> implements Consumer<T> {
+/* package */final class WithFirstSpliterator<T, R> extends CloneableSpliterator<R, WithFirstSpliterator<T, R>>
+        implements Consumer<T> {
+
     private static final int STATE_NONE = 0;
     private static final int STATE_FIRST_READ = 1;
     private static final int STATE_INIT = 2;
