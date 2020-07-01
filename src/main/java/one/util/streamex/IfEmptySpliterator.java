@@ -109,7 +109,7 @@ import java.util.function.Consumer;
         if (alt == null) {
             return spltr.characteristics() & (~SORTED);
         }
-        return (spltr.characteristics() & alt.characteristics() & (~SORTED)) |
-                ((spltr.characteristics() | alt.characteristics()) & (ORDERED));
+        return (spltr.characteristics() & alt.characteristics() & (~SORTED))
+                | ((spltr.characteristics() | alt.characteristics()) & (ORDERED));
     }
 }

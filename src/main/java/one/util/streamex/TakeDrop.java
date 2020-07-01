@@ -45,21 +45,21 @@ interface TakeDrop {
         private boolean checked;
         private final Spliterator<T> source;
         private T cur;
-    
+
         TDOfRef(Spliterator<T> source, boolean drop, boolean inclusive, Predicate<? super T> predicate) {
-            super(source.estimateSize(), source.characteristics()
-                & (ORDERED | SORTED | CONCURRENT | IMMUTABLE | NONNULL | DISTINCT));
+            super(source.estimateSize(),
+                  source.characteristics() & (ORDERED | SORTED | CONCURRENT | IMMUTABLE | NONNULL | DISTINCT));
             this.drop = drop;
             this.predicate = predicate;
             this.inclusive = inclusive;
             this.source = source;
         }
-    
+
         @Override
         public Comparator<? super T> getComparator() {
             return source.getComparator();
         }
-    
+
         @Override
         public boolean tryAdvance(Consumer<? super T> action) {
             if (drop) {
@@ -81,7 +81,7 @@ interface TakeDrop {
             checked = true;
             return false;
         }
-    
+
         @Override
         public void forEachRemaining(Consumer<? super T> action) {
             if (drop) {
@@ -102,13 +102,13 @@ interface TakeDrop {
             } else
                 super.forEachRemaining(action);
         }
-    
+
         @Override
         public void accept(T t) {
             this.cur = t;
         }
     }
-    
+
     final class UnorderedTDOfRef<T> extends CloneableSpliterator<T, UnorderedTDOfRef<T>> implements Consumer<T> {
         private final Predicate<? super T> predicate;
         private final boolean drop;
@@ -143,8 +143,8 @@ interface TakeDrop {
                 }
                 return false;
             }
-            if (!checked.get() && source.tryAdvance(this) && 
-                    (predicate.test(cur) || (checked.compareAndSet(false, true) && inclusive))) {
+            if (!checked.get() && source.tryAdvance(this)
+                    && (predicate.test(cur) || (checked.compareAndSet(false, true) && inclusive))) {
                 action.accept(cur);
                 return true;
             }
@@ -175,7 +175,7 @@ interface TakeDrop {
             return source.characteristics() & (DISTINCT | NONNULL);
         }
     }
-    
+
     final class TDOfInt extends AbstractIntSpliterator implements IntConsumer {
         private final IntPredicate predicate;
         private final boolean drop;
@@ -183,21 +183,21 @@ interface TakeDrop {
         private boolean checked;
         private final Spliterator.OfInt source;
         private int cur;
-    
+
         TDOfInt(Spliterator.OfInt source, boolean drop, boolean inclusive, IntPredicate predicate) {
-            super(source.estimateSize(), source.characteristics() & (ORDERED | SORTED | CONCURRENT | IMMUTABLE | NONNULL
-                | DISTINCT));
+            super(source.estimateSize(),
+                  source.characteristics() & (ORDERED | SORTED | CONCURRENT | IMMUTABLE | NONNULL | DISTINCT));
             this.drop = drop;
             this.predicate = predicate;
             this.inclusive = inclusive;
             this.source = source;
         }
-    
+
         @Override
         public Comparator<? super Integer> getComparator() {
             return source.getComparator();
         }
-    
+
         @Override
         public boolean tryAdvance(IntConsumer action) {
             if (drop) {
@@ -219,7 +219,7 @@ interface TakeDrop {
             checked = true;
             return false;
         }
-    
+
         @Override
         public void forEachRemaining(IntConsumer action) {
             if (drop) {
@@ -240,7 +240,7 @@ interface TakeDrop {
             } else
                 super.forEachRemaining(action);
         }
-    
+
         @Override
         public void accept(int t) {
             this.cur = t;
@@ -254,21 +254,21 @@ interface TakeDrop {
         private boolean checked;
         private final Spliterator.OfLong source;
         private long cur;
-    
+
         TDOfLong(Spliterator.OfLong source, boolean drop, boolean inclusive, LongPredicate predicate) {
-            super(source.estimateSize(), source.characteristics() & (ORDERED | SORTED | CONCURRENT | IMMUTABLE | NONNULL
-                | DISTINCT));
+            super(source.estimateSize(),
+                  source.characteristics() & (ORDERED | SORTED | CONCURRENT | IMMUTABLE | NONNULL | DISTINCT));
             this.drop = drop;
             this.predicate = predicate;
             this.inclusive = inclusive;
             this.source = source;
         }
-    
+
         @Override
         public Comparator<? super Long> getComparator() {
             return source.getComparator();
         }
-    
+
         @Override
         public boolean tryAdvance(LongConsumer action) {
             if (drop) {
@@ -290,7 +290,7 @@ interface TakeDrop {
             checked = true;
             return false;
         }
-    
+
         @Override
         public void forEachRemaining(LongConsumer action) {
             if (drop) {
@@ -311,7 +311,7 @@ interface TakeDrop {
             } else
                 super.forEachRemaining(action);
         }
-    
+
         @Override
         public void accept(long t) {
             this.cur = t;
@@ -325,21 +325,22 @@ interface TakeDrop {
         private boolean checked;
         private final Spliterator.OfDouble source;
         private double cur;
-    
+
         TDOfDouble(Spliterator.OfDouble source, boolean drop, boolean inclusive, DoublePredicate predicate) {
-            super(source.estimateSize(), source.characteristics() & (ORDERED | SORTED | CONCURRENT | IMMUTABLE | NONNULL
-                | DISTINCT));
+            super(source.estimateSize(),
+                  source.characteristics() & (ORDERED | SORTED | CONCURRENT | IMMUTABLE | NONNULL | DISTINCT));
             this.drop = drop;
             this.predicate = predicate;
             this.inclusive = inclusive;
             this.source = source;
         }
-    
+
         @Override
         public Comparator<? super Double> getComparator() {
             return source.getComparator();
         }
-    
+
+
         @Override
         public boolean tryAdvance(DoubleConsumer action) {
             if (drop) {
@@ -361,7 +362,7 @@ interface TakeDrop {
             checked = true;
             return false;
         }
-    
+
         @Override
         public void forEachRemaining(DoubleConsumer action) {
             if (drop) {
@@ -382,7 +383,7 @@ interface TakeDrop {
             } else
                 super.forEachRemaining(action);
         }
-    
+
         @Override
         public void accept(double t) {
             this.cur = t;

@@ -192,18 +192,16 @@ import static one.util.streamex.Internals.none;
         @SuppressWarnings("unchecked")
         PSOfRef(Function<? super T, ? extends R> mapper, Spliterator<T> source, boolean first) {
             super(source, first ? MODE_MAP_FIRST : MODE_MAP_LAST, (T) HEAD_TAIL);
-            BiFunction<? super T, ? super T, ?> m = first ?
-                    ((a, b) -> a == HEAD_TAIL ? mapper.apply(b) : (T) b) :
-                    ((a, b) -> b == HEAD_TAIL ? mapper.apply(a) : (T) a);
+            BiFunction<? super T, ? super T, ?> m = first ? ((a, b) -> a == HEAD_TAIL ? mapper.apply(b) : (T) b)
+                                                          : ((a, b) -> b == HEAD_TAIL ? mapper.apply(a) : (T) a);
             this.mapper = (BiFunction<? super T, ? super T, ? extends R>) m;
         }
 
         @SuppressWarnings("unchecked")
         PSOfRef(Function<? super T, ? extends R> boundMapper, Function<? super T, ? extends R> elseMapper, Spliterator<T> source, boolean first) {
             super(source, first ? MODE_MAP_FIRST_OR_ELSE : MODE_MAP_LAST_OR_ELSE, (T) HEAD_TAIL);
-            this.mapper = first ? 
-                ((a, b) -> a == HEAD_TAIL ? boundMapper.apply(b) : elseMapper.apply(b)) :
-                ((a, b) -> b == HEAD_TAIL ? boundMapper.apply(a) : elseMapper.apply(a));
+            this.mapper = first ? ((a, b) -> a == HEAD_TAIL ? boundMapper.apply(b) : elseMapper.apply(b))
+                                : ((a, b) -> b == HEAD_TAIL ? boundMapper.apply(a) : elseMapper.apply(a));
         }
 
         @Override

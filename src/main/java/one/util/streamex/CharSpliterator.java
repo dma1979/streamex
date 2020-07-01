@@ -113,9 +113,9 @@ import java.util.function.Consumer;
         if (trimEmpty && nextPos == mid) {
             while (nextPos < fence && source.charAt(nextPos) == delimiter)
                 nextPos++;
-            return nextPos == fence ? 
-                    new CharSpliterator(this, mid, true, 0, nextPos + 1) : 
-                        new CharSpliterator(this, mid, false, nextPos - mid - 1, nextPos);
+            return nextPos == fence
+                   ? new CharSpliterator(this, mid, true, 0, nextPos + 1)
+                   : new CharSpliterator(this, mid, false, nextPos - mid - 1, nextPos);
         }
         return new CharSpliterator(this, nextPos, false, 0, nextPos + 1);
     }
