@@ -103,7 +103,9 @@ public interface LongCollector<A, R> extends MergingCollector<Long, A, R> {
      *        result, for the new collector
      * @return the new {@code LongCollector}
      */
-    static <R> LongCollector<R, R> of(Supplier<R> supplier, ObjLongConsumer<R> longAccumulator, BiConsumer<R, R> merger) {
+    static <R> LongCollector<R, R> of(Supplier<R> supplier,
+                                      ObjLongConsumer<R> longAccumulator,
+                                      BiConsumer<R, R> merger) {
         return new LongCollectorImpl<>(supplier, longAccumulator, merger, Function.identity(), ID_CHARACTERISTICS);
     }
 

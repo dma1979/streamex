@@ -29,7 +29,8 @@ import java.util.stream.Stream;
  */
 /* package */ class Java9Specific extends VersionSpecific {
     @Override
-    <T, S extends AbstractStreamEx<T, S>> S callWhile(AbstractStreamEx<T, S> stream, Predicate<? super T> predicate, boolean drop) {
+    <T, S extends AbstractStreamEx<T, S>> S callWhile(AbstractStreamEx<T, S> stream,
+                                                      Predicate<? super T> predicate, boolean drop) {
         Stream<T> upStream = stream.stream();
         return stream.supply(drop ? upStream.dropWhile(predicate) : upStream.takeWhile(predicate));
     }

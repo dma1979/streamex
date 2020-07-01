@@ -42,6 +42,7 @@
           <package name="" withSubpackages="true" static="true" />
         </value>
       </option>
+      <option name="JD_INDENT_ON_CONTINUATION" value="true" />
     </JavaCodeStyleSettings>
     <DBN-PSQL>
       <case-options enabled="true">
