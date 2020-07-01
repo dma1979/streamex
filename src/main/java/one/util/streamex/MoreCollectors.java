@@ -183,7 +183,7 @@ public final class MoreCollectors {
      * @param <K> the type of the map keys
      * @param <V> the type of the map values
      * @return {@code Collector} which collects elements into a {@code Map}
-     * whose keys and values are taken from {@code Map.Entry}
+     *         whose keys and values are taken from {@code Map.Entry}
      * @throws IllegalStateException if this stream contains duplicate keys
      *                               (according to {@link Object#equals(Object)}).
      * @see #entriesToMap(BinaryOperator)
@@ -195,29 +195,26 @@ public final class MoreCollectors {
     }
 
     /**
-     * Returns a {@code Collector} that accumulates elements into a {@code Map}
-     * whose keys and values are taken from {@code Map.Entry} and combining them
-     * using the provided {@code combiner} function to the input elements.
+     * Returns a {@code Collector} that accumulates elements into a {@code Map} whose keys and values are taken from
+     * {@code Map.Entry} and combining them using the provided {@code combiner} function to the input elements.
      *
      * <p>
-     * There are no guarantees on the type or serializability of the {@code Map} returned;
-     * if more control over the returned {@code Map} is required, use {@link #entriesToCustomMap(BinaryOperator, Supplier)}
+     * There are no guarantees on the type or serializability of the {@code Map} returned; if more control over the
+     * returned {@code Map} is required, use {@link #entriesToCustomMap(BinaryOperator, Supplier)}
      *
      * <p>
      * Returned {@code Map} is guaranteed to be modifiable. See {@link one.util.streamex.EntryStream#toMap()}.
      *
      * <p>If the mapped keys contains duplicates (according to {@link Object#equals(Object)}),
-     * the value mapping function is applied to each equal element, and the
-     * results are merged using the provided {@code combiner} function.
+     * the value mapping function is applied to each equal element, and the results are merged using the provided {@code
+     * combiner} function.
      *
-     * @param <K>      the type of the map keys
-     * @param <V>      the type of the map values
-     * @param combiner a merge function, used to resolve collisions between
-     *                 values associated with the same key, as supplied
-     *                 to {@link Map#merge(Object, Object, BiFunction)}
-     * @return {@code Collector} which collects elements into a {@code Map}
-     * whose keys and values are taken from {@code Map.Entry} and combining them
-     * using the {@code combiner} function
+     * @param <K> the type of the map keys
+     * @param <V> the type of the map values
+     * @param combiner a merge function, used to resolve collisions between values associated with the same key,
+     *         as supplied to {@link Map#merge(Object, Object, BiFunction)}
+     * @return {@code Collector} which collects elements into a {@code Map} whose keys and values are taken from {@code
+     *         Map.Entry} and combining them using the {@code combiner} function
      * @throws NullPointerException if combiner is null.
      * @see #entriesToMap()
      * @see Collectors#toMap(Function, Function, BinaryOperator)
@@ -237,10 +234,10 @@ public final class MoreCollectors {
      * @param <V> the type of the map values
      * @param <M> the type of the resulting {@code Map}
      * @param mapSupplier a function which returns a new, empty {@code Map} into
-     *                    which the results will be inserted
+     *         which the results will be inserted
      * @return {@code Collector} which collects elements into a {@code Map}
-     * defined by {@code mapSupplier} function
-     * whose keys and values are taken from {@code Map.Entry}
+     *         defined by {@code mapSupplier} function
+     *         whose keys and values are taken from {@code Map.Entry}
      * @throws IllegalStateException if this stream contains duplicate keys
      *                               (according to {@link Object#equals(Object)}).
      * @throws NullPointerException  if mapSupplier is null.
@@ -270,17 +267,17 @@ public final class MoreCollectors {
      * the value mapping function is applied to each equal element, and the
      * results are merged using the provided {@code combiner} function.
      *
-     * @param <K>         the type of the map keys
-     * @param <V>         the type of the map values
-     * @param <M>         the type of the resulting {@code Map}
-     * @param combiner    a merge function, used to resolve collisions between
-     *                    values associated with the same key, as supplied
-     *                    to {@link Map#merge(Object, Object, BiFunction)}
+     * @param <K> the type of the map keys
+     * @param <V> the type of the map values
+     * @param <M> the type of the resulting {@code Map}
+     * @param combiner a merge function, used to resolve collisions between
+     *         values associated with the same key, as supplied
+     *         to {@link Map#merge(Object, Object, BiFunction)}
      * @param mapSupplier a function which returns a new, empty {@code Map} into
-     *                    which the results will be inserted
+     *         which the results will be inserted
      * @return {@code Collector} which collects elements into a {@code Map}
-     * whose keys and values are taken from {@code Map.Entry} and combining them
-     * using the {@code combiner} function
+     *         whose keys and values are taken from {@code Map.Entry} and combining them
+     *         using the {@code combiner} function
      * @throws NullPointerException if {@code combiner} is null.
      * @throws NullPointerException if {@code mapSupplier} is null.
      * @see #entriesToCustomMap(Supplier)
@@ -297,12 +294,12 @@ public final class MoreCollectors {
     /**
      * Returns a {@code Collector} which counts a number of distinct values the
      * mapper function returns for the stream elements.
-     * 
+     *
      * <p>
      * The operation performed by the returned collector is equivalent to
      * {@code stream.map(mapper).distinct().count()}. This collector is mostly
      * useful as a downstream collector.
-     * 
+     *
      * @param <T> the type of the input elements
      * @param mapper a function which classifies input elements.
      * @return a collector which counts a number of distinct classes the mapper
@@ -435,12 +432,12 @@ public final class MoreCollectors {
      * Returns a {@code Collector} which finds the minimal and maximal element
      * according to the supplied comparator, then applies finisher function to
      * them producing the final result.
-     * 
+     *
      * <p>
      * This collector produces stable result for ordered stream: if several
      * minimal or maximal elements appear, the collector always selects the
      * first encountered.
-     * 
+     *
      * <p>
      * If there are no input elements, the finisher method is not called and
      * empty {@code Optional} is returned. Otherwise the finisher result is
@@ -448,13 +445,11 @@ public final class MoreCollectors {
      *
      * @param <T> the type of the input elements
      * @param <R> the type of the result wrapped into {@code Optional}
-     * @param comparator comparator which is used to find minimal and maximal
-     *        element
-     * @param finisher a {@link BiFunction} which takes minimal and maximal
-     *        element and produces the final result.
+     * @param comparator comparator which is used to find minimal and maximal element
+     * @param finisher a {@link BiFunction} which takes minimal and maximal element and produces the final result.
      * @return a {@code Collector} which finds minimal and maximal elements.
      * @throws NullPointerException if comparator is null, finisher is null,
-     * or finisher returns null.
+     *                              or finisher returns null.
      */
     public static <T, R> Collector<T, ?, Optional<R>> minMax(Comparator<? super T> comparator,
             BiFunction<? super T, ? super T, ? extends R> finisher) {
