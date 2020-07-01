@@ -380,10 +380,13 @@ public interface IntCollector<A, R> extends MergingCollector<Integer, A, R> {
      * @return an {@code IntCollector} implementing the cascaded partitioning
      *         operation
      */
-    static <A, D> IntCollector<?, Map<Boolean, D>> partitioningBy(IntPredicate predicate, IntCollector<A, D> downstream) {
+    static <A, D> IntCollector<?, Map<Boolean, D>> partitioningBy(IntPredicate predicate,
+                                                                  IntCollector<A, D> downstream) {
         ObjIntConsumer<A> downstreamAccumulator = downstream.intAccumulator();
-        ObjIntConsumer<BooleanMap<A>> accumulator = (result, t) -> downstreamAccumulator.accept(
-            predicate.test(t) ? result.trueValue : result.falseValue, t);
+        ObjIntConsumer<BooleanMap<A>> accumulator =
+                (result, t) -> downstreamAccumulator.accept(
+                        predicate.test(t) ? result.trueValue : result.falseValue, t
+                                                           );
         return BooleanMap.partialCollector(downstream).asInt(accumulator);
     }
 

@@ -28,7 +28,8 @@ import java.util.stream.IntStream;
  */
 /* package */ class VersionSpecific {
 
-    <T, S extends AbstractStreamEx<T, S>> S callWhile(AbstractStreamEx<T, S> stream, Predicate<? super T> predicate, boolean drop) {
+    <T, S extends AbstractStreamEx<T, S>> S callWhile(AbstractStreamEx<T, S> stream,
+                                                      Predicate<? super T> predicate, boolean drop) {
         Spliterator<T> spltr = stream.spliterator();
         return stream.supply(
                 spltr.hasCharacteristics(Spliterator.ORDERED) ? new TakeDrop.TDOfRef<>(spltr, drop, false, predicate)

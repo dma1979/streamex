@@ -347,7 +347,8 @@ import static one.util.streamex.Internals.ObjIntBox;
         private final DoubleBinaryOperator mapper;
         private final double[] arr1, arr2;
 
-        public ZipDouble(int fromInclusive, int toExclusive, DoubleBinaryOperator mapper, double[] arr1, double[] arr2) {
+        public ZipDouble(int fromInclusive, int toExclusive, DoubleBinaryOperator mapper,
+                         double[] arr1, double[] arr2) {
             super(fromInclusive, toExclusive);
             this.mapper = mapper;
             this.arr1 = arr1;

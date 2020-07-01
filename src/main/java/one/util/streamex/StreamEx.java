@@ -989,7 +989,8 @@ public class StreamEx<T> extends AbstractStreamEx<T, StreamEx<T>> {
      * @see Collectors#toConcurrentMap(Function, Function)
      * @see #toMap(Function)
      */
-    public <K, V> Map<K, V> toMap(Function<? super T, ? extends K> keyMapper, Function<? super T, ? extends V> valMapper) {
+    public <K, V> Map<K, V> toMap(Function<? super T, ? extends K> keyMapper,
+                                  Function<? super T, ? extends V> valMapper) {
         Map<K, V> map = isParallel() ? new ConcurrentHashMap<>() : new HashMap<>();
         return toMapThrowing(keyMapper, valMapper, map);
     }
@@ -2534,7 +2535,7 @@ public class StreamEx<T> extends AbstractStreamEx<T, StreamEx<T>> {
      * @param n number of possible distinct elements
      * @param k number of elements in each combination
      * @return new sequential stream of possible combinations. Returns an empty stream if {@code k} is bigger
-     * than {@code n}.
+     *         than {@code n}.
      * @throws IllegalArgumentException if n or k is negative or number of possible combinations exceeds {@code
      *                                  Long.MAX_VALUE}.
      * @since 0.6.7
@@ -2954,8 +2955,9 @@ public class StreamEx<T> extends AbstractStreamEx<T, StreamEx<T>> {
      * @since 0.2.1
      */
     public static <U, V, T> StreamEx<T> zip(List<U> first, List<V> second,
-            BiFunction<? super U, ? super V, ? extends T> mapper) {
-        return of(new RangeBasedSpliterator.ZipRef<>(0, checkLength(first.size(), second.size()), mapper, first, second));
+                                            BiFunction<? super U, ? super V, ? extends T> mapper) {
+        return of(new RangeBasedSpliterator.ZipRef<>(0, checkLength(first.size(), second.size()),
+                                                     mapper, first, second));
     }
 
     /**
@@ -2975,7 +2977,8 @@ public class StreamEx<T> extends AbstractStreamEx<T, StreamEx<T>> {
      * @see EntryStream#zip(Object[], Object[])
      * @since 0.2.1
      */
-    public static <U, V, T> StreamEx<T> zip(U[] first, V[] second, BiFunction<? super U, ? super V, ? extends T> mapper) {
+    public static <U, V, T> StreamEx<T> zip(U[] first, V[] second,
+                                            BiFunction<? super U, ? super V, ? extends T> mapper) {
         return zip(Arrays.asList(first), Arrays.asList(second), mapper);
     }
 
@@ -3031,7 +3034,8 @@ public class StreamEx<T> extends AbstractStreamEx<T, StreamEx<T>> {
      * @see #ofTree(Object, Function)
      */
     @SuppressWarnings("unchecked")
-    public static <T, TT extends T> StreamEx<T> ofTree(T root, Class<TT> collectionClass, Function<TT, Stream<T>> mapper) {
+    public static <T, TT extends T> StreamEx<T> ofTree(T root, Class<TT> collectionClass,
+                                                       Function<TT, Stream<T>> mapper) {
         return ofTree(root, t -> collectionClass.isInstance(t) ? mapper.apply((TT) t) : null);
     }
 

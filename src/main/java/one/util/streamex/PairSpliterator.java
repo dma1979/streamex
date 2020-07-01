@@ -198,7 +198,9 @@ import static one.util.streamex.Internals.none;
         }
 
         @SuppressWarnings("unchecked")
-        PSOfRef(Function<? super T, ? extends R> boundMapper, Function<? super T, ? extends R> elseMapper, Spliterator<T> source, boolean first) {
+        PSOfRef(Function<? super T, ? extends R> boundMapper,
+                Function<? super T, ? extends R> elseMapper,
+                Spliterator<T> source, boolean first) {
             super(source, first ? MODE_MAP_FIRST_OR_ELSE : MODE_MAP_LAST_OR_ELSE, (T) HEAD_TAIL);
             this.mapper = first ? ((a, b) -> a == HEAD_TAIL ? boundMapper.apply(b) : elseMapper.apply(b))
                                 : ((a, b) -> b == HEAD_TAIL ? boundMapper.apply(a) : elseMapper.apply(a));
@@ -418,7 +420,8 @@ import static one.util.streamex.Internals.none;
         private final DoubleUnaryOperator unaryMapper;
         private double cur;
 
-        PSOfDouble(DoubleBinaryOperator mapper, DoubleUnaryOperator unaryMapper, Spliterator.OfDouble source, int mode) {
+        PSOfDouble(DoubleBinaryOperator mapper, DoubleUnaryOperator unaryMapper,
+                   Spliterator.OfDouble source, int mode) {
             super(source, mode, null);
             this.mapper = mapper;
             this.unaryMapper = unaryMapper;

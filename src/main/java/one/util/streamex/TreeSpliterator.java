@@ -235,8 +235,10 @@ import static one.util.streamex.Internals.PairBox;
         private final Consumer<? super Entry<Integer, T>> action;
         private final BiFunction<Integer, T, Stream<T>> mapper;
         private Integer depth;
-        
-        public DepthAcceptor(Consumer<? super Entry<Integer, T>> action, BiFunction<Integer, T, Stream<T>> mapper, Integer depth) {
+
+        public DepthAcceptor(Consumer<? super Entry<Integer, T>> action,
+                             BiFunction<Integer, T, Stream<T>> mapper,
+                             Integer depth) {
             this.action = action;
             this.mapper = mapper;
             this.depth = depth;

@@ -193,7 +193,8 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * @return the new stream
      * @since 0.5.2
      */
-    public <KK> EntryStream<KK, V> flatMapToKey(BiFunction<? super K, ? super V, ? extends Stream<? extends KK>> mapper) {
+    public <KK> EntryStream<KK, V> flatMapToKey(
+            BiFunction<? super K, ? super V, ? extends Stream<? extends KK>> mapper) {
         return new EntryStream<>(
                 stream().flatMap(e -> withValue(mapper.apply(e.getKey(), e.getValue()), e.getValue())), context);
     }
@@ -614,13 +615,16 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * @return the new stream
      * @since 0.6.8
      */
-    public <KK> EntryStream<KK, V> mapToKeyPartial(BiFunction<? super K, ? super V, ? extends Optional<? extends KK>> keyMapper) {
-        return new EntryStream<>(stream().map(
-                e -> {
-                    KK mapping = keyMapper.apply(e.getKey(), e.getValue()).orElse(null);
-                    return mapping != null ? new SimpleImmutableEntry<>(mapping, e.getValue()) : null;
-                }
-        ).filter(Objects::nonNull), context);
+    public <KK> EntryStream<KK, V> mapToKeyPartial(
+            BiFunction<? super K, ? super V, ? extends Optional<? extends KK>> keyMapper) {
+        return new EntryStream<>(
+                stream().map(
+                        e -> {
+                            KK mapping = keyMapper.apply(e.getKey(), e.getValue()).orElse(null);
+                            return mapping != null ? new SimpleImmutableEntry<>(mapping, e.getValue()) : null;
+                        }
+                            )
+                        .filter(Objects::nonNull), context);
     }
 
     /**
@@ -670,7 +674,8 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * @return the new stream
      * @since 0.6.8
      */
-    public <VV> EntryStream<K, VV> mapToValuePartial(BiFunction<? super K, ? super V, ? extends Optional<? extends VV>> valueMapper) {
+    public <VV> EntryStream<K, VV> mapToValuePartial(
+            BiFunction<? super K, ? super V, ? extends Optional<? extends VV>> valueMapper) {
         return new EntryStream<>(stream().map(
                 e -> {
                     VV mapping = valueMapper.apply(e.getKey(), e.getValue()).orElse(null);
@@ -1900,7 +1905,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      */
     public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
         return of(Stream.of(new SimpleImmutableEntry<>(k1, v1), new SimpleImmutableEntry<>(k2, v2),
-            new SimpleImmutableEntry<>(k3, v3)));
+                            new SimpleImmutableEntry<>(k3, v3)));
     }
 
     /**
@@ -1921,7 +1926,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      */
     public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
         return of(Stream.of(new SimpleImmutableEntry<>(k1, v1), new SimpleImmutableEntry<>(k2, v2),
-            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4)));
+                            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4)));
     }
 
     /**
@@ -1944,7 +1949,8 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      */
     public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
         return of(Stream.of(new SimpleImmutableEntry<>(k1, v1), new SimpleImmutableEntry<>(k2, v2),
-            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4), new SimpleImmutableEntry<>(k5, v5)));
+                            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4),
+                            new SimpleImmutableEntry<>(k5, v5)));
     }
 
     /**
@@ -1969,8 +1975,8 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      */
     public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6) {
         return of(Stream.of(new SimpleImmutableEntry<>(k1, v1), new SimpleImmutableEntry<>(k2, v2),
-            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4), new SimpleImmutableEntry<>(k5, v5),
-            new SimpleImmutableEntry<>(k6, v6)));
+                            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4),
+                            new SimpleImmutableEntry<>(k5, v5), new SimpleImmutableEntry<>(k6, v6)));
     }
 
     /**
@@ -1995,11 +2001,12 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * @return a sequential stream
      * @since 0.5.2
      */
-    public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6,
-            K k7, V v7) {
+    public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4,
+                                              K k5, V v5, K k6, V v6, K k7, V v7) {
         return of(Stream.of(new SimpleImmutableEntry<>(k1, v1), new SimpleImmutableEntry<>(k2, v2),
-            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4), new SimpleImmutableEntry<>(k5, v5),
-            new SimpleImmutableEntry<>(k6, v6), new SimpleImmutableEntry<>(k7, v7)));
+                            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4),
+                            new SimpleImmutableEntry<>(k5, v5), new SimpleImmutableEntry<>(k6, v6),
+                            new SimpleImmutableEntry<>(k7, v7)));
     }
 
     /**
@@ -2026,11 +2033,12 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * @return a sequential stream
      * @since 0.5.2
      */
-    public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6,
-            K k7, V v7, K k8, V v8) {
+    public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4,
+                                              K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8) {
         return of(Stream.of(new SimpleImmutableEntry<>(k1, v1), new SimpleImmutableEntry<>(k2, v2),
-            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4), new SimpleImmutableEntry<>(k5, v5),
-            new SimpleImmutableEntry<>(k6, v6), new SimpleImmutableEntry<>(k7, v7), new SimpleImmutableEntry<>(k8, v8)));
+                            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4),
+                            new SimpleImmutableEntry<>(k5, v5), new SimpleImmutableEntry<>(k6, v6),
+                            new SimpleImmutableEntry<>(k7, v7), new SimpleImmutableEntry<>(k8, v8)));
     }
 
     /**
@@ -2059,12 +2067,13 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * @return a sequential stream
      * @since 0.5.2
      */
-    public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6,
-            K k7, V v7, K k8, V v8, K k9, V v9) {
+    public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5,
+                                              K k6, V v6, K k7, V v7, K k8, V v8, K k9, V v9) {
         return of(Stream.of(new SimpleImmutableEntry<>(k1, v1), new SimpleImmutableEntry<>(k2, v2),
-            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4), new SimpleImmutableEntry<>(k5, v5),
-            new SimpleImmutableEntry<>(k6, v6), new SimpleImmutableEntry<>(k7, v7), new SimpleImmutableEntry<>(k8, v8),
-            new SimpleImmutableEntry<>(k9, v9)));
+                            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4),
+                            new SimpleImmutableEntry<>(k5, v5), new SimpleImmutableEntry<>(k6, v6),
+                            new SimpleImmutableEntry<>(k7, v7), new SimpleImmutableEntry<>(k8, v8),
+                            new SimpleImmutableEntry<>(k9, v9)));
     }
 
     /**
@@ -2095,12 +2104,13 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * @return a sequential stream
      * @since 0.5.2
      */
-    public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6,
-            K k7, V v7, K k8, V v8, K k9, V v9, K k10, V v10) {
+    public static <K, V> EntryStream<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5,
+                                              K k6, V v6, K k7, V v7, K k8, V v8, K k9, V v9, K k10, V v10) {
         return of(Stream.of(new SimpleImmutableEntry<>(k1, v1), new SimpleImmutableEntry<>(k2, v2),
-            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4), new SimpleImmutableEntry<>(k5, v5),
-            new SimpleImmutableEntry<>(k6, v6), new SimpleImmutableEntry<>(k7, v7), new SimpleImmutableEntry<>(k8, v8),
-            new SimpleImmutableEntry<>(k9, v9), new SimpleImmutableEntry<>(k10, v10)));
+                            new SimpleImmutableEntry<>(k3, v3), new SimpleImmutableEntry<>(k4, v4),
+                            new SimpleImmutableEntry<>(k5, v5), new SimpleImmutableEntry<>(k6, v6),
+                            new SimpleImmutableEntry<>(k7, v7), new SimpleImmutableEntry<>(k8, v8),
+                            new SimpleImmutableEntry<>(k9, v9), new SimpleImmutableEntry<>(k10, v10)));
     }
 
     /**

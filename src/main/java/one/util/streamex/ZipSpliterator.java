@@ -38,7 +38,9 @@ import static one.util.streamex.UnknownSizeSpliterator.USOfRef;
     private final Box<U> l = new Box<>();
     private final Box<V> r = new Box<>();
 
-    ZipSpliterator(Spliterator<U> left, Spliterator<V> right, BiFunction<? super U, ? super V, ? extends R> mapper, boolean trySplit) {
+    ZipSpliterator(Spliterator<U> left, Spliterator<V> right,
+                   BiFunction<? super U, ? super V, ? extends R> mapper,
+                   boolean trySplit) {
         this.left = left;
         this.right = right;
         this.mapper = mapper;
@@ -99,12 +101,14 @@ import static one.util.streamex.UnknownSizeSpliterator.USOfRef;
                         @SuppressWarnings("unchecked")
                         U[] array = (U[]) new Object[(int) (rightSize - leftSize)];
                         drainTo(array, left);
-                        leftPrefix = new TailConcatSpliterator<>(leftPrefix, Spliterators.spliterator(array, characteristics()));
+                        leftPrefix = new TailConcatSpliterator<>(leftPrefix,
+                                                                 Spliterators.spliterator(array, characteristics()));
                     } else {
                         @SuppressWarnings("unchecked")
                         V[] array = (V[]) new Object[(int) (leftSize - rightSize)];
                         drainTo(array, right);
-                        rightPrefix = new TailConcatSpliterator<>(rightPrefix, Spliterators.spliterator(array, characteristics()));
+                        rightPrefix = new TailConcatSpliterator<>(rightPrefix,
+                                                                  Spliterators.spliterator(array, characteristics()));
                     }
                     this.trySplit = false;
                     return new ZipSpliterator<>(leftPrefix, rightPrefix, mapper, false);

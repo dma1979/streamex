@@ -123,9 +123,10 @@ import static one.util.streamex.Internals.none;
         private final Spliterator.OfInt source;
         private boolean started;
         private int acc;
-        
+
         OfInt(Spliterator.OfInt source, IntBinaryOperator op) {
-            super(source.estimateSize(), source.characteristics() & (ORDERED | IMMUTABLE | CONCURRENT | SIZED | NONNULL));
+            super(source.estimateSize(),
+                  source.characteristics() & (ORDERED | IMMUTABLE | CONCURRENT | SIZED | NONNULL));
             this.source = source;
             this.op = op;
         }
@@ -162,9 +163,10 @@ import static one.util.streamex.Internals.none;
         private final Spliterator.OfLong source;
         private boolean started;
         private long acc;
-        
+
         OfLong(Spliterator.OfLong source, LongBinaryOperator op) {
-            super(source.estimateSize(), source.characteristics() & (ORDERED | IMMUTABLE | CONCURRENT | SIZED | NONNULL));
+            super(source.estimateSize(),
+                  source.characteristics() & (ORDERED | IMMUTABLE | CONCURRENT | SIZED | NONNULL));
             this.source = source;
             this.op = op;
         }
@@ -201,9 +203,10 @@ import static one.util.streamex.Internals.none;
         private final Spliterator.OfDouble source;
         private boolean started;
         private double acc;
-        
+
         OfDouble(Spliterator.OfDouble source, DoubleBinaryOperator op) {
-            super(source.estimateSize(), source.characteristics() & (ORDERED | IMMUTABLE | CONCURRENT | SIZED | NONNULL));
+            super(source.estimateSize(),
+                  source.characteristics() & (ORDERED | IMMUTABLE | CONCURRENT | SIZED | NONNULL));
             this.source = source;
             this.op = op;
         }
