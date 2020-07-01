@@ -42,6 +42,7 @@
           <package name="" withSubpackages="true" static="true" />
         </value>
       </option>
+      <option name="JD_ALIGN_PARAM_COMMENTS" value="false" />
       <option name="JD_INDENT_ON_CONTINUATION" value="true" />
     </JavaCodeStyleSettings>
     <DBN-PSQL>
@@ -86,6 +87,7 @@
       <option name="METHOD_CALL_CHAIN_WRAP" value="1" />
       <option name="TERNARY_OPERATION_WRAP" value="1" />
       <option name="TERNARY_OPERATION_SIGNS_ON_NEXT_LINE" value="true" />
+      <option name="WRAP_COMMENTS" value="true" />
       <option name="WRAP_ON_TYPING" value="1" />
     </codeStyleSettings>
   </code_scheme>
