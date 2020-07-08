@@ -73,7 +73,7 @@ import static one.util.streamex.Internals.intSize;
 import static one.util.streamex.Internals.rangeCheck;
 
 /**
- * An {@link IntStream} implementation with additional functionality
+ * An {@link IntStream} implementation with additional functionality.
  * 
  * @author Tagir Valeev
  */

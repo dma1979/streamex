@@ -44,7 +44,7 @@ import java.util.Iterator;
     }
 
     /**
-     * Accumulate new element
+     * Accumulate a new element.
      * 
      * @param t element to accumulate
      * 

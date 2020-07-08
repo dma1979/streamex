@@ -70,7 +70,7 @@ import static one.util.streamex.Internals.selectFirst;
 
 /**
  * Implementations of several collectors in addition to ones available in JDK.
- * 
+ *
  * @author Tagir Valeev
  * @see Collectors
  * @see Joining

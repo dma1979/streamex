@@ -25,13 +25,12 @@ import java.util.stream.Collector;
  * combining algorithm. Instead of providing a combiner which can create new
  * partial result the {@code MergingCollector} must provide a merger which
  * merges the second partial result into the first one.
- * 
- * @author Tagir Valeev
  *
  * @param <T> the type of input elements to the reduction operation
- * @param <A> the mutable accumulation type of the reduction operation (often
- *        hidden as an implementation detail)
+ * @param <A> the mutable accumulation type of the reduction operation (often hidden as an implementation
+ *         detail)
  * @param <R> the result type of the reduction operation
+ * @author Tagir Valeev
  */
 /* package */interface MergingCollector<T, A, R> extends Collector<T, A, R> {
     /**

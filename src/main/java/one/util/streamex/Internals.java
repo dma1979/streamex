@@ -871,7 +871,7 @@ import java.util.stream.Collector.Characteristics;
     }
 
     /**
-     * A spliterator which may perform tail-stream optimization
+     * A spliterator which may perform tail-stream optimization.
      *
      * @param <T> the type of elements returned by this spliterator
      */

@@ -188,8 +188,10 @@ public abstract class AbstractStreamEx<T, S extends AbstractStreamEx<T, S>> exte
     public S onClose(Runnable closeHandler) {
         return (S) super.onClose(closeHandler);
     }
-    
+
     /**
+     * Returns a new stream containing the elements of the original stream that match the given predicate.
+     *
      * @see #nonNull()
      * @see #remove(Predicate)
      * @see StreamEx#select(Class)
@@ -1651,8 +1653,8 @@ public abstract class AbstractStreamEx<T, S extends AbstractStreamEx<T, S>> exte
     }
 
     /**
-     * Produces a list containing cumulative results of applying the
-     * accumulation function going right to left using given seed value.
+     * Produces a list containing cumulative results of applying the accumulation function going right to left using
+     * given seed value.
      *
      * <p>
      * This is a terminal operation.
@@ -1661,24 +1663,20 @@ public abstract class AbstractStreamEx<T, S extends AbstractStreamEx<T, S>> exte
      * The resulting {@link List} is guaranteed to be mutable.
      *
      * <p>
-     * For parallel stream it's not guaranteed that accumulator will always be
-     * executed in the same thread.
+     * For parallel stream it's not guaranteed that accumulator will always be executed in the same thread.
      *
      * <p>
-     * This method cannot take all the advantages of parallel streams as it must
-     * process elements strictly right to left.
+     * This method cannot take all the advantages of parallel streams as it must process elements strictly right to
+     * left.
      *
      * @param <U> The type of the result
      * @param seed the starting value
-     * @param accumulator a <a
-     *        href="package-summary.html#NonInterference">non-interfering </a>,
-     *        <a href="package-summary.html#Statelessness">stateless</a>
-     *        function for incorporating an additional element into a result
-     * @return the {@code List} where the last element is the seed and every
-     *         predecessor element is the result of applying accumulator
-     *         function to the corresponding stream element and the next list
-     *         element. The resulting list is one element longer than this
-     *         stream.
+     * @param accumulator a <a href="package-summary.html#NonInterference">non-interfering </a>,
+     *         <a href="package-summary.html#Statelessness">stateless</a>
+     *         function for incorporating an additional element into a result
+     * @return the {@code List} where the last element is the seed and every predecessor element is the result of
+     *         applying accumulator function to the corresponding stream element and the next list element. The
+     *         resulting list is one element longer than this stream.
      * @see #scanLeft(Object, BiFunction)
      * @see #foldRight(Object, BiFunction)
      * @since 0.2.2
@@ -1790,8 +1788,9 @@ public abstract class AbstractStreamEx<T, S extends AbstractStreamEx<T, S>> exte
         Objects.requireNonNull(predicate);
         Spliterator<T> spltr = spliterator();
         return supply(
-            spltr.hasCharacteristics(Spliterator.ORDERED) ? new TakeDrop.TDOfRef<>(spltr, false, true, predicate)
-                    : new TakeDrop.UnorderedTDOfRef<T>(spltr, false, true, predicate));
+                spltr.hasCharacteristics(Spliterator.ORDERED)
+                ? new TakeDrop.TDOfRef<>(spltr, false, true, predicate)
+                : new TakeDrop.UnorderedTDOfRef<T>(spltr, false, true, predicate));
     }
 
     /**

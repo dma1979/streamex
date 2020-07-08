@@ -60,12 +60,12 @@ import static one.util.streamex.Internals.checkLength;
 import static one.util.streamex.Internals.intSize;
 
 /**
- * A {@link LongStream} implementation with additional functionality
+ * A {@link LongStream} implementation with additional functionality.
  * 
  * @author Tagir Valeev
  */
-public class LongStreamEx extends BaseStreamEx<Long, LongStream, Spliterator.OfLong, LongStreamEx> implements
-        LongStream {
+public class LongStreamEx extends BaseStreamEx<Long, LongStream, Spliterator.OfLong, LongStreamEx>
+        implements LongStream {
     LongStreamEx(LongStream stream, StreamContext context) {
         super(stream, context);
     }

@@ -1760,7 +1760,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
 
     /**
      * Returns an {@code EntryStream} object which wraps given {@link Stream} of
-     * {@link Entry} elements
+     * {@link Entry} elements.
      *
      * @param <K> the type of original stream keys
      * @param <V> the type of original stream values
@@ -1860,8 +1860,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing a single key-value
-     * pair
+     * Returns a sequential {@code EntryStream} containing a single key-value pair.
      *
      * @param <K> the type of key
      * @param <V> the type of value
@@ -1874,7 +1873,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing two key-value pairs
+     * Returns a sequential {@code EntryStream} containing two key-value pairs.
      *
      * @param <K> the type of key
      * @param <V> the type of value
@@ -1890,7 +1889,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing three key-value pairs
+     * Returns a sequential {@code EntryStream} containing three key-value pairs.
      *
      * @param <K> the type of key
      * @param <V> the type of value
@@ -1909,7 +1908,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing four key-value pairs
+     * Returns a sequential {@code EntryStream} containing four key-value pairs.
      *
      * @param <K> the type of key
      * @param <V> the type of value
@@ -1930,7 +1929,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing five key-value pairs
+     * Returns a sequential {@code EntryStream} containing five key-value pairs.
      *
      * @param <K> the type of key
      * @param <V> the type of value
@@ -1954,7 +1953,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing six key-value pairs
+     * Returns a sequential {@code EntryStream} containing six key-value pairs.
      *
      * @param <K> the type of key
      * @param <V> the type of value
@@ -1980,7 +1979,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing seven key-value pairs
+     * Returns a sequential {@code EntryStream} containing seven key-value pairs.
      *
      * @param <K> the type of key
      * @param <V> the type of value
@@ -2010,7 +2009,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing eight key-value pairs
+     * Returns a sequential {@code EntryStream} containing eight key-value pairs.
      *
      * @param <K> the type of key
      * @param <V> the type of value
@@ -2042,7 +2041,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing nine key-value pairs
+     * Returns a sequential {@code EntryStream} containing nine key-value pairs.
      *
      * @param <K> the type of key
      * @param <V> the type of value
@@ -2077,7 +2076,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     }
 
     /**
-     * Returns a sequential {@code EntryStream} containing ten key-value pairs
+     * Returns a sequential {@code EntryStream} containing ten key-value pairs.
      *
      * @param <K> the type of key
      * @param <V> the type of value
