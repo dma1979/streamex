@@ -29,6 +29,8 @@ import static one.util.streamex.Internals.CancelException;
 import static one.util.streamex.Internals.CloneableSpliterator;
 
 /**
+ * An internal extension of {@link CloneableSpliterator} having {@code UNORDERED} characteristics.
+ *
  * @author Tagir Valeev
  */
 /* package */class UnorderedCancellableSpliterator<T, A>

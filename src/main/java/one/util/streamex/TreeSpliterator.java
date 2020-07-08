@@ -31,8 +31,9 @@ import static one.util.streamex.Internals.ObjIntBox;
 import static one.util.streamex.Internals.PairBox;
 
 /**
- * @author Tagir Valeev
+ * An internal implementation of {@link CloneableSpliterator} with a tree-like optimization.
  *
+ * @author Tagir Valeev
  */
 /* package */ abstract class TreeSpliterator<T, U> extends CloneableSpliterator<U, TreeSpliterator<T, U>> 
         implements Consumer<T>, AutoCloseable, Runnable {

@@ -105,6 +105,8 @@ import java.util.function.Consumer;
     }
 
     /**
+     * Calculates the chunk size.
+     *
      * @param n n > k
      * @param k k > 0
      * @return CNK(n, k)

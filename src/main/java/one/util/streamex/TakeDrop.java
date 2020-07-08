@@ -35,6 +35,8 @@ import java.util.function.Predicate;
 import one.util.streamex.Internals.CloneableSpliterator;
 
 /**
+ * Holds internal implementations of consumers.
+ *
  * @author Tagir Valeev
  */
 interface TakeDrop {

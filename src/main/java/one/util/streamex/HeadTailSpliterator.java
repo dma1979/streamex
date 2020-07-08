@@ -27,6 +27,8 @@ import static one.util.streamex.Internals.Box;
 import static one.util.streamex.Internals.TailSpliterator;
 
 /**
+ An internal implementation of {@link TailSpliterator} with a head tailing extension.
+ *
  * @author Tagir Valeev
  */
 /*package*/ final class HeadTailSpliterator<T, U> extends AbstractSpliterator<U> implements TailSpliterator<U> {

@@ -36,6 +36,8 @@ import static one.util.streamex.Internals.TailSpliterator;
 import static one.util.streamex.Internals.none;
 
 /**
+ * An internal extension of {@link CloneableSpliterator} with pair optimization.
+ *
  * @author Tagir Valeev
  */
 /* package */abstract class PairSpliterator<T, S extends Spliterator<T>, R, SS extends PairSpliterator<T, S, R, SS>>

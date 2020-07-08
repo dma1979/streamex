@@ -24,8 +24,9 @@ import java.util.function.LongConsumer;
 import one.util.streamex.Internals.CloneableSpliterator;
 
 /**
- * @author Tagir Valeev
+ * An internal {@link Spliterator} specialized for constant values.
  *
+ * @author Tagir Valeev
  */
 /* package */abstract class ConstSpliterator<T, S extends ConstSpliterator<T, ?>> extends CloneableSpliterator<T, S> {
     long remaining;

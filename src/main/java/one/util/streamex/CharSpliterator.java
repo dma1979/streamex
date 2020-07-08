@@ -19,6 +19,8 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 
 /**
+ * An internal {@link Spliterator} specialized for {@code char} values.
+ *
  * @author Tagir Valeev
  */
 /* package */class CharSpliterator implements Spliterator<String> {

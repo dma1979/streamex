@@ -23,6 +23,8 @@ import java.util.function.Consumer;
 import one.util.streamex.Internals.CloneableSpliterator;
 
 /**
+ * An internal implementation of {@link CloneableSpliterator} with a first stream element optimization.
+ *
  * @author Tagir Valeev
  */
 /* package */final class WithFirstSpliterator<T, R> extends CloneableSpliterator<R, WithFirstSpliterator<T, R>>

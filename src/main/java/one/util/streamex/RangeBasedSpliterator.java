@@ -31,6 +31,8 @@ import static one.util.streamex.Internals.CloneableSpliterator;
 import static one.util.streamex.Internals.ObjIntBox;
 
 /**
+ * An internal extension of {@link CloneableSpliterator} with a range-based optimization.
+ *
  * @author Tagir Valeev
  */
 /* package */abstract class RangeBasedSpliterator<T, S extends RangeBasedSpliterator<T, ?>>

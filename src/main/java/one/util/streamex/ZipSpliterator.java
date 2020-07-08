@@ -27,6 +27,8 @@ import static one.util.streamex.UnknownSizeSpliterator.MAX_BATCH;
 import static one.util.streamex.UnknownSizeSpliterator.USOfRef;
 
 /**
+ * An internal implementation of {@link Internals.CloneableSpliterator} with a zipping extension.
+ *
  * @author Tagir Valeev
  */
 /* package */class ZipSpliterator<U, V, R> implements Spliterator<R> {

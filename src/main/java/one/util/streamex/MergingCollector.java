@@ -21,10 +21,9 @@ import java.util.function.BinaryOperator;
 import java.util.stream.Collector;
 
 /**
- * A {@code MergingCollector} is a {@code Collector} with more specific
- * combining algorithm. Instead of providing a combiner which can create new
- * partial result the {@code MergingCollector} must provide a merger which
- * merges the second partial result into the first one.
+ * A {@code MergingCollector} is a {@code Collector} with more specific combining algorithm.
+ * Instead of providing a combiner which can create new partial result
+ * the {@code MergingCollector} must provide a merger which merges the second partial result into the first one.
  *
  * @param <T> the type of input elements to the reduction operation
  * @param <A> the mutable accumulation type of the reduction operation (often hidden as an implementation

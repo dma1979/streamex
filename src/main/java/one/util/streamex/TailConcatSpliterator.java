@@ -21,9 +21,10 @@ import java.util.function.Consumer;
 import one.util.streamex.Internals.TailSpliterator;
 
 /**
- * @author Tagir Valeev
+ * An internal implementation of {@link TailSpliterator} with a tail concatenation extension.
  *
  * @param <T> type of the elements
+ * @author Tagir Valeev
  */
 /* package */class TailConcatSpliterator<T> implements TailSpliterator<T> {
     private Spliterator<T> left, right;

@@ -23,6 +23,8 @@ import java.util.function.Consumer;
 import one.util.streamex.Internals.CloneableSpliterator;
 
 /**
+ * An internal extension of {@link CloneableSpliterator} with pair-permutation optimization.
+ *
  * @author Tagir Valeev
  */
 /* package */final class PairPermutationSpliterator<T, R>

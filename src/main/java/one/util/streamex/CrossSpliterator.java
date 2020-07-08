@@ -26,6 +26,8 @@ import java.util.function.Consumer;
 import java.util.stream.StreamSupport;
 
 /**
+ * An internal {@link Spliterator} specialized for crossing values.
+ *
  * @author Tagir Valeev
  */
 /* package */abstract class CrossSpliterator<T, A> implements Spliterator<A> {

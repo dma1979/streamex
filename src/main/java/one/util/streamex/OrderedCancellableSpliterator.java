@@ -27,6 +27,8 @@ import static one.util.streamex.Internals.CancelException;
 import static one.util.streamex.Internals.CloneableSpliterator;
 
 /**
+ * An internal extension of {@link CloneableSpliterator} having {@code ORDERED} characteristics.
+ *
  * @author Tagir Valeev
  */
 /* package */final class OrderedCancellableSpliterator<T, A>
@@ -42,8 +44,10 @@ import static one.util.streamex.Internals.CloneableSpliterator;
     private volatile OrderedCancellableSpliterator<T, A> suffix;
     private A payload;
 
-    OrderedCancellableSpliterator(Spliterator<T> source, Supplier<A> supplier, BiConsumer<A, ? super T> accumulator,
-            BinaryOperator<A> combiner, Predicate<A> cancelPredicate) {
+    OrderedCancellableSpliterator(Spliterator<T> source,
+                                  Supplier<A> supplier, BiConsumer<A, ? super T> accumulator,
+                                  BinaryOperator<A> combiner,
+                                  Predicate<A> cancelPredicate) {
         this.source = source;
         this.supplier = supplier;
         this.accumulator = accumulator;

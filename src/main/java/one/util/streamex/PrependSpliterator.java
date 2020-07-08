@@ -21,9 +21,10 @@ import java.util.function.Consumer;
 import one.util.streamex.Internals.TailSpliterator;
 
 /**
- * @author Tagir Valeev
+ An internal implementation of {@link TailSpliterator} with a prepending extension.
  *
  * @param <T> type of the elements
+ * @author Tagir Valeev
  */
 /* package */class PrependSpliterator<T> implements TailSpliterator<T> {
     private Spliterator<T> source;
