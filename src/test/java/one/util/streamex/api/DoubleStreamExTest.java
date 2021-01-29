@@ -18,6 +18,7 @@ package one.util.streamex.api;
 import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -46,6 +47,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import one.util.streamex.DoubleStreamEx;
+import one.util.streamex.EntryStream;
 import one.util.streamex.IntStreamEx;
 import one.util.streamex.LongStreamEx;
 import one.util.streamex.StreamEx;
@@ -57,6 +59,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -538,5 +541,19 @@ public class DoubleStreamExTest {
         assertArrayEquals(new double[] { 1, 0, 10, 0, 100, 0, 1000 }, DoubleStreamEx.of(1, 10, 100, 1000).intersperse(0)
                 .toArray(), 0.0);
         assertEquals(0L, IntStreamEx.empty().intersperse(1).count());
+    }
+
+    @Test
+    public void testSkipLast() {
+        Supplier<DoubleStreamEx> s = () -> DoubleStreamEx.of(1d, 2d, 3d, 4d, 5d);
+        assertArrayEquals(new double[] {1d, 2d, 3d, 4d, 5d}, s.get().skipLast(0).toArray(), 0.0);
+        assertArrayEquals(new double[] {1d, 2d, 3d, 4d}, s.get().skipLast(1).toArray(), 0.0);
+        assertArrayEquals(new double[] {1d, 2d, 3d}, s.get().skipLast(2).toArray(), 0.0);
+        assertArrayEquals(new double[] {1d, 2d}, s.get().skipLast(3).toArray(), 0.0);
+        assertArrayEquals(new double[] {1d}, s.get().skipLast(4).toArray(), 0.0);
+        assertArrayEquals(new double[0], s.get().skipLast(5).toArray(), 0.0);
+        assertArrayEquals(new double[0], s.get().skipLast(10).toArray(), 0.0);
+        assertArrayEquals(new double[0], s.get().skipLast(Integer.MAX_VALUE - 1).toArray(), 0.0);
+        assertThrows(IllegalArgumentException.class, () -> s.get().skipLast(Integer.MAX_VALUE).toArray());
     }
 }

@@ -633,4 +633,18 @@ public class LongStreamExTest {
                           LongStreamEx.of(1, 10, 100, 1000).intersperse(0).toArray());
         assertEquals(0L, IntStreamEx.empty().intersperse(1).count());
     }
+
+    @Test
+    public void testSkipLast() {
+        Supplier<LongStreamEx> s = () -> LongStreamEx.of(1L, 2, 3, 4, 5);
+        assertArrayEquals(new long[] {1L, 2L, 3L, 4L, 5L}, s.get().skipLast(0).toArray());
+        assertArrayEquals(new long[] {1L, 2L, 3L, 4L}, s.get().skipLast(1).toArray());
+        assertArrayEquals(new long[] {1L, 2L, 3L}, s.get().skipLast(2).toArray());
+        assertArrayEquals(new long[] {1L, 2L}, s.get().skipLast(3).toArray());
+        assertArrayEquals(new long[] {1L}, s.get().skipLast(4).toArray());
+        assertArrayEquals(new long[0], s.get().skipLast(5).toArray());
+        assertArrayEquals(new long[0], s.get().skipLast(10).toArray());
+        assertArrayEquals(new long[0], s.get().skipLast(Integer.MAX_VALUE - 1).toArray());
+        assertThrows(IllegalArgumentException.class, () -> s.get().skipLast(Integer.MAX_VALUE).toArray());
+    }
 }

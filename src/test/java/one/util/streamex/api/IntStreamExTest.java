@@ -51,6 +51,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import one.util.streamex.DoubleStreamEx;
 import one.util.streamex.IntStreamEx;
 import one.util.streamex.StreamEx;
 
@@ -801,5 +802,32 @@ public class IntStreamExTest {
         assertArrayEquals(new int[] { 1, 0, 10, 0, 100, 0, 1000 }, IntStreamEx.of(1, 10, 100, 1000).intersperse(0)
                 .toArray());
         assertEquals(0L, IntStreamEx.empty().intersperse(1).count());
+    }
+
+    @Test
+    public void testSkipLast() {
+        Supplier<IntStreamEx> s = () -> IntStreamEx.of(1, 2, 3, 4, 5);
+        assertArrayEquals(new int[] {1, 2, 3, 4, 5}, s.get().skipLast(0).toArray());
+        assertArrayEquals(new int[] {1, 2, 3, 4}, s.get().skipLast(1).toArray());
+        assertArrayEquals(new int[] {1, 2, 3}, s.get().skipLast(2).toArray());
+        assertArrayEquals(new int[] {1, 2}, s.get().skipLast(3).toArray());
+        assertArrayEquals(new int[] {1}, s.get().skipLast(4).toArray());
+        assertArrayEquals(new int[0], s.get().skipLast(5).toArray());
+        assertArrayEquals(new int[0], s.get().skipLast(10).toArray());
+        assertArrayEquals(new int[0], s.get().skipLast(Integer.MAX_VALUE - 1).toArray());
+        assertArrayEquals(new int[0], IntStreamEx.generate(() -> 1).limit(1_000)
+                                                 .skipLast(Integer.MAX_VALUE - 1)
+                                                 .toArray());
+        assertThrows(IllegalArgumentException.class, () -> s.get().skipLast(Integer.MAX_VALUE).toArray());
+    }
+
+    @Test
+    public void testSkipLastWithEdgeCases() {
+        //TODO check this 'edge case'
+/*
+        assertArrayEquals(new int[] {1}, IntStreamEx.generate(() -> 1).limit(Integer.MAX_VALUE)
+                                                    .skipLast(Integer.MAX_VALUE-1)
+                                                    .toArray());
+*/
     }
 }
