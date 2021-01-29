@@ -30,7 +30,9 @@ import java.util.PrimitiveIterator.OfLong;
 import java.util.Random;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.LongBinaryOperator;
@@ -639,6 +641,61 @@ public class LongStreamEx extends BaseStreamEx<Long, LongStream, Spliterator.OfL
     @Override
     public LongStreamEx skip(long n) {
         return new LongStreamEx(stream().skip(n), context);
+    }
+
+    /**
+     * Returns a new, non-splittable, sequential stream containing
+     * all the elements of the original stream except the last n elements.
+     * Consumes space proportional to the number of elements skipped.
+     *
+     * <p>
+     * For example, {@code IntStreamEx.of(1L, 2L, 3L).skipLast(1)} will yield a stream containing
+     * two elements: 1L, 2L.
+     *
+     * <p>
+     * This is an <a href="package-summary.html#StreamOps">quasi-intermediate operation</a>.
+     *
+     * @param n the non-negative number of elements to leave off the end of the stream.
+     * @return the new, sequential stream
+     * @throws IllegalArgumentException if {@code n} is negative or {@link Integer#MAX_VALUE}
+     * @since 0.7.4
+     */
+    public LongStreamEx skipLast(int n) {
+        if (n < 0 || n == Integer.MAX_VALUE)
+            throw new IllegalArgumentException(Long.toString(n));
+        if (n == 0)
+            return this;
+
+        BlockingDeque<Long> buffer = new LinkedBlockingDeque<> ( n + 1);
+        Spliterator.OfLong source = this.spliterator();
+
+        return delegate(new Spliterator.OfLong() {
+
+            @Override
+            public boolean tryAdvance(LongConsumer action) {
+                while (buffer.remainingCapacity() > 0 && source.tryAdvance((LongConsumer) buffer::offer)) { }
+                if (buffer.size() > n) {
+                    action.accept(buffer.poll());
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public Spliterator.OfLong trySplit() {
+                return null;
+            }
+
+            @Override
+            public long estimateSize() {
+                return source.estimateSize() - n;
+            }
+
+            @Override
+            public int characteristics() {
+                return source.characteristics();
+            }
+        }).sequential();
     }
 
     @Override

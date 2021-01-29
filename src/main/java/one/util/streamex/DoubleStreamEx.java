@@ -30,7 +30,9 @@ import java.util.PrimitiveIterator.OfDouble;
 import java.util.Random;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.function.BiConsumer;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
@@ -579,6 +581,61 @@ public class DoubleStreamEx extends BaseStreamEx<Double, DoubleStream, Spliterat
     @Override
     public DoubleStreamEx skip(long n) {
         return new DoubleStreamEx(stream().skip(n), context);
+    }
+
+    /**
+     * Returns a new, non-splittable, sequential stream containing
+     * all the elements of the original stream except the last n elements.
+     * Consumes space proportional to the number of elements skipped.
+     *
+     * <p>
+     * For example, {@code DoubleStreamEx.of(1d, 2d, 3d).skipLast(1)} will yield a stream containing
+     * two elements: 1d, 2d.
+     *
+     * <p>
+     * This is an <a href="package-summary.html#StreamOps">quasi-intermediate operation</a>.
+     *
+     * @param n the non-negative number of elements to leave off the end of the stream.
+     * @return the new, sequential stream
+     * @throws IllegalArgumentException if {@code n} is negative or {@link Integer#MAX_VALUE}
+     * @since 0.7.4
+     */
+    public DoubleStreamEx skipLast(int n) {
+        if (n < 0 || n == Integer.MAX_VALUE)
+            throw new IllegalArgumentException(Long.toString(n));
+        if (n == 0)
+            return this;
+
+        BlockingDeque<Double> buffer = new LinkedBlockingDeque<> ( n + 1);
+        Spliterator.OfDouble source = this.spliterator();
+
+        return delegate(new Spliterator.OfDouble() {
+
+            @Override
+            public boolean tryAdvance(DoubleConsumer action) {
+                while (buffer.remainingCapacity() > 0 && source.tryAdvance((DoubleConsumer) buffer::offer)) { }
+                if (buffer.size() > n) {
+                    action.accept(buffer.poll());
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public Spliterator.OfDouble trySplit() {
+                return null;
+            }
+
+            @Override
+            public long estimateSize() {
+                return source.estimateSize() - n;
+            }
+
+            @Override
+            public int characteristics() {
+                return source.characteristics();
+            }
+        }).sequential();
     }
 
     @Override
