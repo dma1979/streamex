@@ -647,4 +647,15 @@ public class LongStreamExTest {
         assertArrayEquals(new long[0], s.get().skipLast(Integer.MAX_VALUE - 1).toArray());
         assertThrows(IllegalArgumentException.class, () -> s.get().skipLast(Integer.MAX_VALUE).toArray());
     }
+
+    @Test
+    public void testSkipLastOne() {
+        assertArrayEquals(new long[] {1L, 1L, 1L, 1L}, LongStreamEx.generate(() -> 1).limit(5).skipLast(1).toArray());
+        assertArrayEquals(new long[] {1L, 2L, 3L}, LongStreamEx.of(1, 2, 3, 4).skipLast(1).toArray());
+        assertArrayEquals(new long[] {4L, 3L, 2L}, LongStreamEx.of(4, 3, 2, 1).skipLast(1).toArray());
+
+        assertArrayEquals(new long[] {1L, 1L, 1L, 1L}, LongStreamEx.generate(() -> 1L).limit(5).parallel().skipLast(1).toArray());
+        assertArrayEquals(new long[] {1L, 2L, 3L}, LongStreamEx.of(1L, 2L, 3L, 4L).parallel().skipLast(1).toArray());
+        assertArrayEquals(new long[] {4L, 3L, 2L}, LongStreamEx.of(4L, 3L, 2L, 1L).parallel().skipLast(1).toArray());
+    }
 }

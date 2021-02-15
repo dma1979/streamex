@@ -822,6 +822,17 @@ public class IntStreamExTest {
     }
 
     @Test
+    public void testSkipLastOne() {
+        assertArrayEquals(new int[] {1, 1, 1, 1}, IntStreamEx.generate(() -> 1).limit(5).skipLast(1).toArray());
+        assertArrayEquals(new int[] {1, 2, 3}, IntStreamEx.of(1, 2, 3, 4).skipLast(1).toArray());
+        assertArrayEquals(new int[] {4, 3, 2}, IntStreamEx.of(4, 3, 2, 1).skipLast(1).toArray());
+
+        assertArrayEquals(new int[] {1, 1, 1, 1}, IntStreamEx.generate(() -> 1).limit(5).parallel().skipLast(1).toArray());
+        assertArrayEquals(new int[] {1, 2, 3}, IntStreamEx.of(1, 2, 3, 4).parallel().skipLast(1).toArray());
+        assertArrayEquals(new int[] {4, 3, 2}, IntStreamEx.of(4, 3, 2, 1).parallel().skipLast(1).toArray());
+    }
+
+    @Test
     public void testSkipLastWithEdgeCases() {
         //TODO check this 'edge case'
 /*

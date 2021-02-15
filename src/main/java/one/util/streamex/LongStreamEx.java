@@ -662,11 +662,13 @@ public class LongStreamEx extends BaseStreamEx<Long, LongStream, Spliterator.OfL
      */
     public LongStreamEx skipLast(int n) {
         if (n < 0 || n == Integer.MAX_VALUE)
-            throw new IllegalArgumentException(Long.toString(n));
+            throw new IllegalArgumentException(Integer.toString(n));
         if (n == 0)
             return this;
+        if (n == 1)
+            return pairMap((a, b) -> a);
 
-        BlockingDeque<Long> buffer = new LinkedBlockingDeque<> ( n + 1);
+        BlockingDeque<Long> buffer = new LinkedBlockingDeque<>(n + 1);
         Spliterator.OfLong source = this.spliterator();
 
         return delegate(new Spliterator.OfLong() {

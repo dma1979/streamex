@@ -2296,4 +2296,12 @@ public class StreamExTest {
         assertArrayEquals(new int[0], s.get().skipLast(10).toArray());
         assertArrayEquals(new int[0], IntStreamEx.empty().skipLast(10).toArray());
     }
+
+    @Test
+    public void testSkipLastOne() {
+        assertEquals(Collections.singletonMap(3, "aaa"),
+                     StreamEx.of("aaa", "bb").skipLast(1).mapToEntry(String::length, Function.identity()).toMap());
+        assertEquals(3, StreamEx.of("a", "b", "c", "d").skipLast(1).count());
+        assertEquals(2, StreamEx.of(1, 2, 3).skipLast(1).count());
+    }
 }

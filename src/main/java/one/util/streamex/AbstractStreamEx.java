@@ -365,23 +365,23 @@ public abstract class AbstractStreamEx<T, S extends AbstractStreamEx<T, S>> exte
      * @since 0.7.4
      */
     public S skipLast(int n) {
-        if (n < 0 || n == Integer.MAX_VALUE) {
-            throw new IllegalArgumentException(Long.toString(n));
-        }
-        if (n == 0) {
+        if (n < 0 || n == Integer.MAX_VALUE)
+            throw new IllegalArgumentException(Integer.toString(n));
+        if (n == 0)
             return supply(this);
-        }
+        if (n == 1)
+            return supply(pairMap((a, b) -> a));
 
-        BlockingDeque<T> buffer = new LinkedBlockingDeque<> ( n + 1 );
-        Spliterator<T> source = this.spliterator ();
+        BlockingDeque<T> buffer = new LinkedBlockingDeque<>(n + 1);
+        Spliterator<T> source = this.spliterator();
 
-        StreamEx<T> stream = StreamEx.of ( new Spliterator<T> () {
+        StreamEx<T> stream = StreamEx.of(new Spliterator<T>() {
             @Override
             public boolean tryAdvance(Consumer<? super T> action) {
-                while (buffer.remainingCapacity () > 0 && source.tryAdvance ( buffer::offer )) {
+                while (buffer.remainingCapacity() > 0 && source.tryAdvance(buffer::offer)) {
                 }
-                if (buffer.size () > n) {
-                    action.accept ( buffer.poll () );
+                if (buffer.size() > n) {
+                    action.accept(buffer.poll());
                     return true;
                 }
                 return false;
@@ -394,15 +394,15 @@ public abstract class AbstractStreamEx<T, S extends AbstractStreamEx<T, S>> exte
 
             @Override
             public long estimateSize() {
-                return source.estimateSize () - n;
+                return source.estimateSize() - n;
             }
 
             @Override
             public int characteristics() {
-                return source.characteristics ();
+                return source.characteristics();
             }
-        } );
-        return supply ( stream ).sequential ();
+        });
+        return supply(stream).sequential();
     }
 
     @Override

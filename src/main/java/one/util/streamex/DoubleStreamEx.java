@@ -602,11 +602,13 @@ public class DoubleStreamEx extends BaseStreamEx<Double, DoubleStream, Spliterat
      */
     public DoubleStreamEx skipLast(int n) {
         if (n < 0 || n == Integer.MAX_VALUE)
-            throw new IllegalArgumentException(Long.toString(n));
+            throw new IllegalArgumentException(Integer.toString(n));
         if (n == 0)
             return this;
+        if (n == 1)
+            return pairMap((a, b) -> a);
 
-        BlockingDeque<Double> buffer = new LinkedBlockingDeque<> ( n + 1);
+        BlockingDeque<Double> buffer = new LinkedBlockingDeque<>(n + 1);
         Spliterator.OfDouble source = this.spliterator();
 
         return delegate(new Spliterator.OfDouble() {

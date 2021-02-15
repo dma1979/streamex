@@ -556,4 +556,15 @@ public class DoubleStreamExTest {
         assertArrayEquals(new double[0], s.get().skipLast(Integer.MAX_VALUE - 1).toArray(), 0.0);
         assertThrows(IllegalArgumentException.class, () -> s.get().skipLast(Integer.MAX_VALUE).toArray());
     }
+
+    @Test
+    public void testSkipLastOne() {
+        assertArrayEquals(new double[] {1d, 1d, 1d, 1d}, DoubleStreamEx.generate(() -> 1).limit(5).skipLast(1).toArray(), 0.0);
+        assertArrayEquals(new double[] {1d, 2d, 3d}, DoubleStreamEx.of(1, 2, 3, 4).skipLast(1).toArray(), 0.0);
+        assertArrayEquals(new double[] {4d, 3d, 2d}, DoubleStreamEx.of(4, 3, 2, 1).skipLast(1).toArray(), 0.0);
+
+        assertArrayEquals(new double[] {1d, 1d, 1d, 1d}, DoubleStreamEx.generate(() -> 1).limit(5).parallel().skipLast(1).toArray(), 0.0);
+        assertArrayEquals(new double[] {1d, 2d, 3d}, DoubleStreamEx.of(1d, 2d, 3d, 4d).parallel().skipLast(1).toArray(), 0.0);
+        assertArrayEquals(new double[] {4d, 3d, 2d}, DoubleStreamEx.of(4d, 3d, 2d, 1d).parallel().skipLast(1).toArray(), 0.0);
+    }
 }
